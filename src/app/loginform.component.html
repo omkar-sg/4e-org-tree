@@ -1,0 +1,67 @@
+
+<div class="container  ">
+    <div class="row">   <pre></pre></div>
+    <div class="row">  <h1>4E Software Solutions</h1>   <pre></pre></div>
+
+    <div class="row">    <pre></pre></div>
+    <pre></pre>
+    <div class="row my-custom-row justify-content-end align-items-center">
+
+        <div class="col"></div>
+
+        <div class="col  ">
+            <div class="p-3 border bg-secondary">
+
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                    <h3>Login</h3>
+                    <br>
+                    <input type="text" placeholder="username" formControlName="userName">
+                    <span class="text-danger" *ngIf="loginForm.controls['userName'].invalid && loginForm.controls['userName'].touched"> Email is required</span>
+                    <br><br>
+                    <!-- <h3>Password</h3> -->
+                    <input type="password" placeholder="password" formControlName="password">
+                    <span class="text-danger" *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched"> Password is required</span>
+                    <br><br>
+                    <button class="btn btn-primary" [disabled]="!submit()">Login</button>
+                    <!-- routerLink="/dashboard" -->
+                
+                </form>
+
+            </div>
+            
+        </div>
+
+        <div class="col"></div>
+
+
+        
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form [formGroup]="login" (ngSubmit)="loginn()">
+    <h3>Username</h3>
+    <br>
+    <input required minlength="3" type="text" placeholder="username" formControlName="user">
+    <br><br>
+    <h3>Password</h3>
+    <input type="password" placeholder="password" formControlName="password">
+    <br><br>
+    <button>Login</button>
+
+</form> -->

@@ -1,0 +1,34 @@
+<div>
+    <ip-navbar></ip-navbar>
+
+
+
+    <pre></pre>
+</div>
+
+<div class="container">
+    <div class="row my-custom-row justify-content-end align-items-center">
+        <div class="col">
+
+        </div>
+
+        <div class="col ">
+            <div class="p-3 border bg-secondary">
+                <form [formGroup]="kpiForm" (ngSubmit)="login()">
+                    <input type="text" placeholder="kpi name" formControlName="kpiName">
+                    <br><br>
+                    <!-- <input type="text" placeholder="kpi description" formControlName="kpiDesc"> -->
+                    <textarea class="input" name="kpidesc" id="kpidesc" cols="30" rows="5" placeholder="kpi description" formControlName="kpiDesc"></textarea>
+                    <br>
+                    <button class="btn btn-primary" [disabled]="!submit()">Submit</button>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col">
+
+        </div>
+
+    </div>
+</div>
