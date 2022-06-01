@@ -11,6 +11,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { Token } from './token.service';
 import { Navbar } from './navbar.component';
 import { AuthGuard } from './auth.guard';
+import { authInterceptorProviders } from './serverinterceptor.interceptor';
+import { Data } from './data.service';
+import { CreateKpi } from './createkpi.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,7 @@ import { AuthGuard } from './auth.guard';
   imports: [
     BrowserModule,ReactiveFormsModule,AppRoutingModule,HttpClientModule
   ],
-  providers: [Server,Token,AuthGuard],
+  providers: [Server,Token,AuthGuard,authInterceptorProviders,Data,CreateKpi],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

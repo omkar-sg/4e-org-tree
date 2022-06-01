@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+
 const url= 'https://dev-api.tqmi.io/user-management/login'             //'https://reqres.in/api/login'
 
 const httpOptions = {headers: new HttpHeaders({ 'Content-Type': 'application/json' })}

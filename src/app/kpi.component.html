@@ -7,25 +7,64 @@
 </div>
 
 <div class="container">
-    <div class="row my-custom-row justify-content-end align-items-center">
-        <div class="col">
+    <div class="row my-custom-row ">
 
-        </div>
 
-        <div class="col ">
-            <div class="p-3 border bg-secondary">
-                <form [formGroup]="kpiForm" (ngSubmit)="login()">
-                    <input type="text" placeholder="kpi name" formControlName="kpiName">
+        <div class="col-sm-3  ">
+            <div class="p-3 border bg-secondary ">
+                <form [formGroup]="kpi" (ngSubmit)="create()">
+                    <input type="text" placeholder="kpi title" formControlName="title">
                     <br><br>
                     <!-- <input type="text" placeholder="kpi description" formControlName="kpiDesc"> -->
-                    <textarea class="input" name="kpidesc" id="kpidesc" cols="30" rows="5" placeholder="kpi description" formControlName="kpiDesc"></textarea>
-                    <br>
-                    <button class="btn btn-primary" [disabled]="!submit()">Submit</button>
+                    <textarea class="input" name="kpidesc" id="kpidesc" cols="30" rows="5" placeholder="kpi goal" formControlName="goalDescription"></textarea>
+                    <br><br>
+                    <div class="input-group">
+                        <label >Departments</label>
+                        <select  formControlName="departmentId" >
+                            <option value="" *ngFor="let res of deptarr" [ngValue]="res.id">{{res.name}}</option>
+                             
+                           
+                        </select>
+                    </div>
+                    <br><br>
+                    <div class="input-group">
+                        <label >Data Capture Frequency</label>
+                        <select  formControlName="dataCaptureFrequency" #datacap (change)="t1($event)"  >
+                            <option  *ngFor="let res of datacaparr" [value]="res._id">{{res.value}}</option>
+                             
+                           
+                        </select>
+                    </div>
+                    <br><br>
+                    <div class="input-group">
+                        <label >Data Review Frequency</label>
+                        <select  formControlName="reviewFrequency" >
+                            <option  *ngFor="let res of filtrevfre" [value]="res._id">{{res.value}}</option>
+                             
+                           
+                        </select>
+                    </div>
+                    <br><br>
+                    <button class="btn btn-primary" [disabled]="!this.kpi.valid">Submit</button>
+                    <!-- <button (click)="getFiltDataRev(5)">Data Rev</button> -->
                 </form>
 
             </div>
         </div>
 
+
+        <div class="col">
+            <!-- <div class="input-group">
+                <label >Departments</label>
+                <select  formControlName="kpidepts">
+                    <option [ngValue]="1">1</option>
+                   
+                </select>
+            </div> -->
+
+        </div>
+
+       
         <div class="col">
 
         </div>
