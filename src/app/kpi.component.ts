@@ -3,11 +3,14 @@ import { FormControl, FormGroup,FormBuilder, Validators } from "@angular/forms";
 import {  Router } from "@angular/router";
 import { CreateKpi } from "./createkpi.service";
 import { Data } from "./data.service";
+import { KpiDetails } from "./kpidetails.component";
 import { Token } from "./token.service";
 
 @Component({
     selector:'ip-kpi',
-    templateUrl:'./kpi.component.html'
+    templateUrl:'./kpi.component.html',
+    styleUrls:['./kpi.component.css']
+    
 })
 
 export class Kpi{
@@ -22,6 +25,10 @@ export class Kpi{
     datacaparr:any=[]
     datarevfreq:any=[]//
     filtrevfre:any=[]
+    perspectives:any=[]
+    kpitype:any=[]
+    kpicategories:any=[]
+    directionofgoodness=['Up','Down']
 
     kpiForm= new FormGroup({
 
@@ -36,7 +43,7 @@ export class Kpi{
     kpi= this.fb.group({
         title:['',[Validators.required]],
         departmentId:['',Validators.required],
-        // perspective:['',Validators.required],
+        perspective:['',Validators.required],
         goalDescription: ['',Validators.required],
         // remark:['',Validators.required],
         dataCaptureFrequency:['',Validators.required],
@@ -44,7 +51,7 @@ export class Kpi{
 
         // title:"test",
         // departmentId:"8",
-        perspective:"5ea2c4dd1d4ec94491c0802b",
+        // perspective:"5ea2c4dd1d4ec94491c0802b",
         // goalDescription: "hjghj",
         remark:"rem",
         // dataCaptureFrequency: "606573e173d7e41e2e59a4a1",
@@ -52,13 +59,16 @@ export class Kpi{
 
         annualTarget: 100,
         actionLimit: "MANUAL",	
-        category: "5ea2c50f1d4ec94491c08030",
+        // category: "5ea2c50f1d4ec94491c08030",
+        category:["",Validators.required],
         isTypeKPI: true,
-        type: "606573e173d7e41e2e59a4b0",
+        //type: "606573e173d7e41e2e59a4b0",
+        type:['',Validators.required],
 
         parentId: null,
         perspectivePrefix: "I",
-        directionOfGoodness: "Up",
+        // directionOfGoodness: "Up",
+        directionOfGoodness:['',Validators.required],
         ytdCalculation: "SUM",
         weightage: 1,
 
@@ -123,6 +133,9 @@ export class Kpi{
         this.getDept()
         this.getDataCapFreq()
         this.getDataRevFreq()
+        this.getType()
+        this.getCategories()   //category
+        this.getPerspective()
         // this.getFiltDataRev(2)
     }
 
@@ -138,6 +151,18 @@ export class Kpi{
 
     getDataRevFreq(){
         this.data.getDataRevFreq().subscribe((res:any)=>{this.datarevfreq=res.response;})
+    }
+
+    getType(){
+        this.data.getType().subscribe((res:any)=>{this.kpitype=res.response;console.log(res.response)}) //this.kpitype=res.response;
+    }
+
+    getCategories(){
+        this.data.getCategories().subscribe((res:any)=>{this.kpicategories=res.response;console.log(res)}) //this.kpicategories=res.response;
+    }
+
+    getPerspective(){
+        this.data.getPerspective().subscribe((res:any)=>{this.perspectives=res.response;console.log(res)}) //this.perspectives=res.response;
     }
 
 
@@ -163,6 +188,8 @@ export class Kpi{
     createkpi(){
         console.log(this.kpi.value)
         this.ckpi.createKpi(this.kpi.value).subscribe(x=>console.log(x))
+        alert("KPI Created")
+        this.kpi.reset()
     }
     
 

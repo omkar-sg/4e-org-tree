@@ -1,3 +1,38 @@
 <div>
   <ip-navbar></ip-navbar>
 </div>
+
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col">
+        <div class="col-4" *ngFor="let res of kpilist">
+          <br>
+          <div class="card w-70">
+
+            <div class="card-body">
+              <h5 class="card-title">Title : {{res.title}}</h5>
+              <p class="card-text">Department :{{res.departmentName}}</p>
+              <p class="card-text">Financial Year:{{res.financialYearStart | date:'yyyy'}} - {{res.financialYearEnd |
+                date:'yyyy'}}</p>
+              <p class="card-text">Direction Of Goodness : {{res.directionOfGoodness}}</p>
+              <button class="btn btn-primary" (click)="getDetails(res._id)">Details</button>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <div class="col">
+          <div class="col" *ngIf="id">
+            <br>
+            <!-- <h2>Check</h2> -->
+            <ip-kpidetails [id]="id"></ip-kpidetails>
+
+
+          </div>
+      </div>
+
+
+
+  </div>
+</div>

@@ -10,22 +10,77 @@
     <div class="row my-custom-row ">
 
 
-        <div class="col-sm-3  ">
-            <div class="p-3 border bg-secondary ">
+        <div class="col" >
+             <h2>Create KPI</h2>
+            <!-- <div class="input-group">
+                <label >Departments</label>
+                <select  formControlName="kpidepts">
+                    <option [ngValue]="1">1</option>
+                   
+                </select>
+            </div> -->
+
+        </div>
+
+
+        <div class="col-6 ">
+            <div class="p-3  bg-light " style="outline: auto ;">
                 <form [formGroup]="kpi" (ngSubmit)="create()">
+                    <label >Title</label>
                     <input type="text" placeholder="kpi title" formControlName="title">
                     <br><br>
                     <!-- <input type="text" placeholder="kpi description" formControlName="kpiDesc"> -->
-                    <textarea class="input" name="kpidesc" id="kpidesc" cols="30" rows="5" placeholder="kpi goal" formControlName="goalDescription"></textarea>
+                    <label >KPI Goal</label>
+                    <textarea class="input" name="kpidesc" id="kpidesc" cols="30" rows="5" placeholder="kpi goal" formControlName="goalDescription" style="height: 50px ;"></textarea>
                     <br><br>
                     <div class="input-group">
                         <label >Departments</label>
                         <select  formControlName="departmentId" >
-                            <option value="" *ngFor="let res of deptarr" [ngValue]="res.id">{{res.name}}</option>
-                             
-                           
+                            <option  *ngFor="let res of deptarr" [value]="res.id">{{res.name}}</option>
+     
                         </select>
                     </div>
+
+                    <br><br>
+                    <div class="input-group">
+                        <label >Type</label>
+                        <select  formControlName="type" >
+                            <option *ngFor="let res of kpitype" [value]="res._id">{{res.type}}</option>
+     
+                        </select>
+                    </div>
+
+
+                    <br><br>
+                    <div class="input-group">
+                        <label >Category</label>
+                        <select  formControlName="category" >
+                            <option  *ngFor="let res of kpicategories" [value]="res._id">{{res.category}}</option>
+     
+                        </select>
+                    </div>
+
+                    <br><br>
+                    <div class="input-group">
+                        <label >Perspective</label>
+                        <select  formControlName="perspective" >
+                            <option  *ngFor="let res of perspectives" [value]="res._id">{{res.perspective}}</option>
+     
+                        </select>
+                    </div>
+
+                    <br><br>
+                    <div class="input-group">
+                        <label >Direction Of Goodness</label>
+                        <select  formControlName="directionOfGoodness" >
+                            <option  *ngFor="let res of directionofgoodness" [value]="res">{{res}}</option>
+     
+                        </select>
+                    </div>
+
+
+
+
                     <br><br>
                     <div class="input-group">
                         <label >Data Capture Frequency</label>
@@ -53,17 +108,7 @@
         </div>
 
 
-        <div class="col">
-            <!-- <div class="input-group">
-                <label >Departments</label>
-                <select  formControlName="kpidepts">
-                    <option [ngValue]="1">1</option>
-                   
-                </select>
-            </div> -->
-
-        </div>
-
+        
        
         <div class="col">
 

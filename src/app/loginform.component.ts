@@ -27,6 +27,10 @@ export class LoginForm implements OnInit {
             this.router.navigate(['/dashboard'])
 
         }
+        else{
+
+            alert("Session expired")
+        }
     }
 
     login(){

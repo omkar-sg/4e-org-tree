@@ -14,13 +14,15 @@ import { AuthGuard } from './auth.guard';
 import { authInterceptorProviders } from './serverinterceptor.interceptor';
 import { Data } from './data.service';
 import { CreateKpi } from './createkpi.service';
+import { KpiDetails } from './kpidetails.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
-    AppComponent,childComponent,LoginForm,Observable1,routingcomponent,Navbar
+    AppComponent,childComponent,LoginForm,Observable1,routingcomponent,Navbar,KpiDetails
   ],
   imports: [
-    BrowserModule,ReactiveFormsModule,AppRoutingModule,HttpClientModule
+    BrowserModule,ReactiveFormsModule,AppRoutingModule,HttpClientModule,NgMultiSelectDropDownModule.forRoot() 
   ],
   providers: [Server,Token,AuthGuard,authInterceptorProviders,Data,CreateKpi],
   bootstrap: [AppComponent]

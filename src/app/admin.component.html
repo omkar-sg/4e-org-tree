@@ -1,4 +1,4 @@
-<div class="col">
+<!-- <div class="col">
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
           <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -52,4 +52,31 @@
           </ul>
         </div>
       </div>
+</div> -->
+
+
+<div>
+  <ip-navbar></ip-navbar>
+</div>
+<div [formGroup]="myform">
+  <hr>
+  <div class="input-group" >
+    <label >Months</label>
+    <select  formControlName="month" >
+        <option  *ngFor="let res of months" [value]="res">{{res}}</option>
+
+    </select>
+  </div>
+  <br><br>
+  
+  
+</div>
+
+
+<div [formGroup]="capdata" (ngSubmit)="addMonths()">
+  <input type="text" formControlName="target" placeholder="upper"><br>
+  <input type="text" formControlName="lower" placeholder="lower"><br>
+  <input type="text" formControlName="upper" placeholder="upper"><br>
+  <button type="submit" (click)="addMonths()">Submit</button>
+
 </div>
