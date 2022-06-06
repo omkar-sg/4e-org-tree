@@ -56,9 +56,9 @@
 
 
 <div>
-  <ip-navbar></ip-navbar>
+  <!-- <ip-navbar></ip-navbar> -->
 </div>
-<div [formGroup]="myform">
+<!-- <div [formGroup]="myform">
   <hr>
   <div class="input-group" >
     <label >Months</label>
@@ -70,13 +70,70 @@
   <br><br>
   
   
-</div>
+</div> -->
 
 
-<div [formGroup]="capdata" (ngSubmit)="addMonths()">
+<!-- <div [formGroup]="capdata" (ngSubmit)="addMonths()">
   <input type="text" formControlName="target" placeholder="upper"><br>
   <input type="text" formControlName="lower" placeholder="lower"><br>
   <input type="text" formControlName="upper" placeholder="upper"><br>
   <button type="submit" (click)="addMonths()">Submit</button>
+
+</div> -->
+
+
+<!-- <div class="input-group">
+  <select *ngFor="let month of months" >
+      <option value="month">{{month}}</option>
+      
+  </select>
+</div>    -->
+
+
+
+  <!-- <ng-select [items]="months" bindLabel="id" placeholder="Select Category" appendTo="body" multiple="true"
+  [(ngModel)]="currmonth">
+</ng-select> -->
+
+
+<div style="margin-top: 20px;">
+    <form [formGroup]="myform" >
+        <!-- <input type="text" formControlName="title"> -->
+        <div class="col-sm-2" style="padding:20px ; " >
+          <ng-select  [items]="months" bindLabel="name" bindValue="name"   [multiple]="true"
+          [(ngModel)]="currmonth"  (change)="rm" [ngModelOptions]="{standalone:true}"  (add)="addMonths($event); " (remove)="removeMonths(currmonth)" (clear)="clearMonths()"  >
+        </ng-select>
+
+        </div>
+        
+
+        <!-- <div  >
+          <select  (change)="addMonths()">
+              <option>Select Months</option>
+              <option value="month" *ngFor="let month of months" >{{month}}</option>
+          </select>
+        </div> -->
+
+        <hr>
+        
+
+        <div formArrayName="dataCaptured">
+
+            <div   *ngFor="let item of dataCaptured.controls; let i=index" formGroupName="{{i}}">
+                <input  type="text"  placeholder="target" formControlName="target">
+                <input  type="text" placeholder="lower" formControlName="lower">
+                <input type="text" placeholder="upper" formArrayName="upper">
+
+                <button class="btn-danger" (click)="removeMonths(i)" > Remove</button>
+
+
+            </div>
+            <button (click)="getMonthRange()"> Add </button>
+        </div>
+
+        <button type="submit" (click)="submit()">Submit</button>
+
+
+    </form>
 
 </div>

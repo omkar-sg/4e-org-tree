@@ -1,5 +1,5 @@
 <div>
-    <ip-navbar></ip-navbar>
+    <!-- <ip-navbar></ip-navbar> -->
 
 
 
@@ -100,6 +100,42 @@
                         </select>
                     </div>
                     <br><br>
+
+
+                    <label>Select Month</label>
+
+                    <ng-select [items]="months" bindLabel="name" bindValue="id" placeholder="Select Month"appendTo="body"
+                    [multiple]="true" [(ngModel)]="selected" [ngModelOptions]="{standalone: true}"
+                    (add)="addMonths()"  style="margin-left:40px; width: 400px; " 
+                    >
+                    </ng-select>
+                    <!-- ----- -->
+                    <div formArrayName="captureData" *ngFor="let data of dataCaptured.controls; let i=index">
+                        <!-- The repeated alias template -->
+                        <div class="input-group mt-5" formGroupName="{{i}}">
+                        <h5>{{months[selected[i]-1].name}}</h5> &nbsp;
+                        
+                        
+                        
+                        target:
+                        <input id="{{'target'+ i }}" type="number" formControlName='target' class="form-control mt-2">  
+                        <!-- class="form-control mt-2" -->
+                        lower:
+                        <input id="{{'lower'+ i }}" type="number" formControlName='lower' class="form-control mt-2" >
+                        Upper:
+                        <input id="{{'upper'+ i }}" type="number" formControlName='upper' class="form-control mt-2">
+                        <button class="btn btn-danger" (click)="removeData(i)">Remove</button>
+                        </div>
+                        </div>
+                        
+                        
+                        
+                        
+                    
+                    
+
+
+
                     <button class="btn btn-primary" [disabled]="!this.kpi.valid">Submit</button>
                     <!-- <button (click)="getFiltDataRev(5)">Data Rev</button> -->
                 </form>

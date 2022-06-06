@@ -22,7 +22,8 @@
                     <input type="password" placeholder="password" formControlName="password">
                     <span class="text-danger" *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched"> Password is required</span>
                     <br><br>
-                    <button class="btn btn-primary" [disabled]="!submit()">Login</button>
+                    <button class="btn btn-primary" [disabled]="!this.loginForm.valid">Login</button><br>
+                    <input type="checkbox" (click)="remMeflag=true">Remember ME
                     <!-- routerLink="/dashboard" -->
                 
                 </form>

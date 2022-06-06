@@ -5,9 +5,8 @@ import { Token } from './token.service';
 import { Observable } from 'rxjs';
 
 const TOKEN_HEADER_KEY = 'Authorization';
+
 @Injectable()
-
-
 export class ServerInterceptor implements HttpInterceptor {
     constructor(private token: Token) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

@@ -6,6 +6,9 @@
 
   <div>{{child}}</div>
   </div> -->
+<div>
+  <ip-navbar *ngIf="!isExpired()"></ip-navbar>
+</div>
 
   <div>
     <router-outlet></router-outlet>

@@ -13,7 +13,11 @@ import { Token } from "./token.service";
 
 export class LoginForm implements OnInit {
 
-    token!:{token:string};
+
+    remMeflag=false
+
+
+   
     loginForm= new FormGroup({
         userName:new FormControl('',[Validators.minLength(3),Validators.required]),
         password:new FormControl('',[Validators.required,])
@@ -27,10 +31,10 @@ export class LoginForm implements OnInit {
             this.router.navigate(['/dashboard'])
 
         }
-        else{
+        // else{
 
-            alert("Session expired")
-        }
+        //     alert("Logged Out")
+        // }
     }
 
     login(){
@@ -40,19 +44,17 @@ export class LoginForm implements OnInit {
             
             
             x=>{
-                if(true){
-
-                console.log(x)
+               
+                if (this.remMeflag){this.remMe();console.log('from login if')}
+                // console.log(x)
                 this.tokenservice.saveToken(x)
-                this.loginForm.reset()
+                
+                // this.loginForm.reset()
                 alert("Login successful")
                 this.router.navigate(['/dashboard'])
-                }
+             
 
-                else{
-
-                    alert("Session expired")
-                }
+    
                 
             },
             
@@ -64,19 +66,6 @@ export class LoginForm implements OnInit {
 
             )
 
-        console.log(this.token)
-        // if(localStorage.getItem('token'))
-        // {
-        //     this.loginForm.reset()
-        //     alert("Login successful")
-        //     this.router.navigate(['/dashboard'])
-        // }
-        // else
-        // {   
-        //     this.loginForm.reset()
-        //     alert("Username or password is incorrect")
-
-        // }
         
     }
 
@@ -86,22 +75,16 @@ export class LoginForm implements OnInit {
         // console.log(this.login)
         return this.loginForm.valid
         
+        
     }
 
-    // authenticate(){
-    //     if(this.loginForm.value.userName===this.server.credentials[0].username && this.loginForm.value.password===this.server.credentials[0].password ){
-    //         this.loginForm.reset()
-    //         alert("Login Success !")
-    //        this.router.navigate(['/dashboard'])
-    //         console.log('Authenticate')
-    //     }
 
-    //     else{
-            
-    //         this.loginForm.reset()
-    //         alert("Username/Password is wrong")
-            
-    //     }
-    // }
+    remMe(){
+
+            this.tokenservice.remMe()
+        
+
+    }
+
 
 }

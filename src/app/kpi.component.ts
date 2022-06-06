@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
-import { FormControl, FormGroup,FormBuilder, Validators } from "@angular/forms";
+import { FormControl, FormGroup,FormBuilder, Validators, FormArray } from "@angular/forms";
 import {  Router } from "@angular/router";
 import { CreateKpi } from "./createkpi.service";
 import { Data } from "./data.service";
 import { KpiDetails } from "./kpidetails.component";
 import { Token } from "./token.service";
+import jwt_decode from "jwt-decode";
 
 @Component({
     selector:'ip-kpi',
@@ -16,7 +17,7 @@ import { Token } from "./token.service";
 export class Kpi{
 
 
-    constructor(private data: Data, private fb:FormBuilder, private ckpi:CreateKpi){}
+    constructor(private data: Data, private fb:FormBuilder, private ckpi:CreateKpi , private tokenservice:Token){}
 
 
     kpidata:{kpiName:string,kpiDesc:string}[]=[]
@@ -29,6 +30,33 @@ export class Kpi{
     kpitype:any=[]
     kpicategories:any=[]
     directionofgoodness=['Up','Down']
+    
+    months=
+    [{ id: 1, name: 'January' },
+
+        { id: 2, name: 'February' },
+
+        { id: 3, name: 'March' },
+
+        { id: 4, name: 'April' },
+
+        { id: 5, name: 'May' },
+
+        { id: 6, name: 'June' },
+
+        { id: 7, name: 'July' },
+
+        { id: 8, name: 'August' },
+
+        { id: 9, name: 'September' },
+
+        { id: 10, name: 'Octomber' },
+
+        { id: 11, name: 'November' },
+
+        { id: 12, name: 'December' }];
+
+selected:any[]=[]
 
     kpiForm= new FormGroup({
 
@@ -73,19 +101,21 @@ export class Kpi{
         weightage: 1,
 
 
-        captureData:[[
-            {
-                target: 0,
-                lower: 0,
-                upper: 0,
-                startDate: "2022-05-01T00:00:00",
-                endDate: "2022-05-31T23:59:59",
-                indicator: 2,
-                disabled: false,
-                upperValueType: "ABSOLUTE",
-                lowerValueType: "ABSOLUTE"
-            }
-        ]],
+        // captureData:[[
+        //     {
+        //         target: 0,
+        //         lower: 0,
+        //         upper: 0,
+        //         startDate: "2022-05-01T00:00:00",
+        //         endDate: "2022-05-31T23:59:59",
+        //         indicator: 2,
+        //         disabled: false,
+        //         upperValueType: "ABSOLUTE",
+        //         lowerValueType: "ABSOLUTE"
+        //     }
+        // ]],
+
+        captureData:this.fb.array([]),
 
 
         unitOfMeasurement: "606573e173d7e41e2e59a4ab",
@@ -96,8 +126,8 @@ export class Kpi{
         owners: {
             individuals: [
                 {
-                    employeeId: "omkar.goskewar",
-                    isPrimary: true
+                    employeeId:'',// "omkar.goskewar",
+                    isPrimary: ''
                 }
             ]
         },
@@ -165,6 +195,10 @@ export class Kpi{
         this.data.getPerspective().subscribe((res:any)=>{this.perspectives=res.response;console.log(res)}) //this.perspectives=res.response;
     }
 
+    getMonthRange(){
+        this.data.getMonthrange().subscribe((res:any)=>{console.log(res)})
+    }
+
 
 
     t1(event:any){
@@ -186,6 +220,17 @@ export class Kpi{
 
 
     createkpi(){
+        let tk:any=jwt_decode(this.tokenservice.getToken() as string)
+
+        this.kpi.controls['owners'].setValue({
+            individuals: [
+                {
+                    employeeId:tk.employeeId,
+                    isPrimary: tk.isPrimary
+                }
+            ]
+        })
+        
         console.log(this.kpi.value)
         this.ckpi.createKpi(this.kpi.value).subscribe(x=>console.log(x))
         alert("KPI Created")
@@ -228,6 +273,55 @@ export class Kpi{
     
         return this.kpiForm.valid
     }
+
+
+    get dataCaptured(){
+        return this.kpi.get('captureData') as FormArray
+      }
+
+
+    addMonths(){
+
+        const newitem= this.fb.group({
+          target:[''],
+          lower:[''],
+          upper:[''],
+          startDate: "2022-05-01T00:00:00",
+          endDate: "2022-05-31T23:59:59",
+          indicator: 2,
+          disabled: false,
+          upperValueType: "ABSOLUTE",
+          lowerValueType: "ABSOLUTE"
+        });
+
+        this.dataCaptured.push(newitem)
+
+    }
+
+    removeMonths(id:any){
+        // console.log(this.myform.get('month')?.value)
+        this.dataCaptured.controls.splice(id,1)
+    }
+    removeData(i?: any) {
+
+        // console.log(i);
+    
+        console.log(this.selected)
+    //    let id= this.selected.indexOf(this.selected.find(el=>el))
+
+    //    console.log(id)
+
+    //    this.dataCaptured.controls.splice(i,1)
+    
+    
+    
+        this.dataCaptured.removeAt(i);
+    
+        this.selected.splice(i, 1);
+    
+        // this.captureData
+    
+      }
 
 
 

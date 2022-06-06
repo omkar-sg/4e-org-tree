@@ -31,6 +31,7 @@ export class Navbar implements OnInit{
 
     signout(){
         this.tokenservice.signout()
+        this.router.navigate(['/login'])
 
     }
 

@@ -6,6 +6,7 @@ import { AuthGuard } from './auth.guard';
 
 import { Dashboard } from './dashboard.component';
 import { Kpi } from './kpi.component';
+import { KpiData } from './kpidata.component';
 import { LoginForm } from './loginform.component';
 
 
@@ -13,11 +14,12 @@ import { LoginForm } from './loginform.component';
 
 const routes: Routes = [
 
-   {path:'' ,redirectTo:'/login', pathMatch:'full'},
-   {path:'login' ,component:LoginForm},
-   {path:'admin' ,component:Admin,canActivate:[AuthGuard]},
+  {path:'' ,redirectTo:'/login', pathMatch:'full'},
+  {path:'login' ,component:LoginForm},
+  {path:'admin' ,component:Admin,canActivate:[AuthGuard]},
   {path:'dashboard' ,component:Dashboard,canActivate:[AuthGuard]},
   {path:'kpi' ,component:Kpi,canActivate:[AuthGuard]},
+  {path:'kpidata' ,component:KpiData,canActivate:[AuthGuard]},
 
 ]
 

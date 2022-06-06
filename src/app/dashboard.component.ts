@@ -39,7 +39,7 @@ export class Dashboard implements OnInit{
         // }
 
         this.getKpi()
-       console.log( formatDate(new Date(1648751400000),'MM-yyyy','en-US'),' Format');
+    //    console.log( formatDate(new Date(1648751400000),'MM-yyyy','en-US'),' Format');
 
     }
 
